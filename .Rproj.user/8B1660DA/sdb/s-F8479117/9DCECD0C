@@ -1,0 +1,18 @@
+{
+    "contents" : "library(gg)\nPCbiplot <- function(PC, x=\"PC1\", y=\"PC2\") {\n  # PC being a prcomp object\n  data.PCA<-PC<-fit\n  data <- data.frame(obsnames=row.names(PC$x), PC$x)\n  plot <- ggplot(data, aes_string(x=x, y=y)) + geom_point()\n  plot\n  datapc <- data.frame(varnames=rownames(data.PCA$rotation),\n                       data.PCA$rotation)\n  mult <- min(\n    (max(data[,\"PC2\"]) - min(data[,\"PC2\"])/(max(datapc[,\"PC2\"])-min(datapc[,\"PC2\"]))),\n    (max(data[,\"PC1\"]) - min(data[,\"PC1\"])/(max(datapc[,\"PC1\"])-min(datapc[,\"PC1\"])))\n  )\n  datapc <- transform(datapc,\n                      v1 = .7 * mult * (get(\"PC1\")),\n                      v2 = .7 * mult * (get(\"PC2\"))\n  )\n  plot <- plot + coord_equal() + \n    geom_text(data=datapc, aes(x=v1, y=v2, label=varnames), size = 3, vjust=1, color=\"red\")\n  plot <- plot + \n    geom_segment(data=datapc, aes(x=0, y=0, xend=v1, yend=v2), arrow=arrow(length=unit(0.2,\"cm\")), alpha=0.75, color=\"red\")\n  plot\n}\n\nfit <- prcomp(USArrests, scale=T)\nPCbiplot(fit)\nsummary(USArrests)\nscale(USArrests)",
+    "created" : 1464697790299.000,
+    "dirty" : true,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "2556011420",
+    "id" : "9DCECD0C",
+    "lastKnownWriteTime" : 7011605692497750387,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 10,
+    "source_on_save" : false,
+    "type" : "r_source"
+}
